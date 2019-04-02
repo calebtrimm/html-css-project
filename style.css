@@ -79,7 +79,7 @@ body {
 .nav-drop-box {
     display: none;
     width: 200%;
-    height: 150px;
+    height: 200px;
     background-color: var(--main-color);
     position:absolute;
     top: 100%;
@@ -347,10 +347,13 @@ body {
     border-radius: 2px;;
     height: 30px;
     overflow: hidden;
+    margin: 10px 0;
 
 }
 
-
+#check {
+    margin: 0;
+}
 
 input:focus {
     outline: none;
@@ -406,6 +409,8 @@ input:focus {
 
     .nav-list > a {
         height: 44px;
+        width: 140px;
+        text-align: center;
         text-decoration: none;
         background-image: linear-gradient(currentColor, currentColor);
         background-position: 0% 100%;
@@ -423,6 +428,18 @@ input:focus {
     .nav-drop-box  a {
         text-decoration: none;
         color: white;
+    }
+
+    .nav-drop-box li {
+        padding: 10px;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-position: 0% 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 5px;
+        transition: background-size .3s;
+    }
+    .nav-drop-box li:hover {
+        background-size: 100% 5px;
     }
     .hamburger {
         display: none;
