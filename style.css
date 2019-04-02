@@ -405,12 +405,21 @@ input:focus {
     }
 
     .nav-list > a {
+        height: 44px;
         text-decoration: none;
-        padding-right: 50px;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-position: 0% 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 5px;
+        transition: background-size .3s;
+        margin-right: 50px;
         display: inline-block;
         color: white;
     }
     
+    .nav-list >a:hover {
+        background-size: 100% 5px;
+    }
     .nav-drop-box  a {
         text-decoration: none;
         color: white;
