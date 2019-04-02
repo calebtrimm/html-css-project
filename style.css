@@ -3,6 +3,46 @@
     --corners: 4px;
 }
 
+@keyframes flip {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+@keyframes flip-slide {
+    from {
+        transform: translateX(0%) rotate(0);
+        opacity: 1;
+    }
+
+    25% {
+        transform: translate(100%) rotate(180deg) scale(1.2);
+        opacity: 1;
+    }
+    70% {
+        transform: translateX(100%) rotate(180deg) scale(0);
+    }
+
+
+    95% {
+        transform: translateX(100%) rotate(180deg) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%) rotate(360)deg scale(1);
+        opacity: 1;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -10,7 +50,8 @@ body {
 }
 
 .navbar {
-    margin:0;
+    z-index: 2;
+    margin: 0;
     height: 60px;
     width: 100%;
     background-color: var(--main-color);
@@ -24,25 +65,84 @@ body {
     display: none;
 }
 
-.navbar li{
-    margin: 0 40px 0 40px;;
+.nav-list > li{
+    margin: 0 40px 0 0;;
     display: inline-block;
 
 }
+.nav-drop {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-drop-box {
+    display: none;
+    width: 200%;
+    height: 150px;
+    background-color: var(--main-color);
+    position:absolute;
+    top: 100%;
+    left: -35px;
+    margin: 0;
+}
+
+.nav-drop-box ul{
+    list-style-type: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.nav-drop-box li {
+    margin-top: 10px;
+}
+
+.nav-drop:hover > .nav-drop-box {
+    display: block;
+}
+
+
 .logo {
     position: absolute;
     left: 0;
+    top: 0;
     height: 50px;
-    margin: 5px 0 5px 30px;
+    margin: 5px 0 5px 15px;
 }
 
 .hamburger {
-    position: absolute;
-    right: 0;
+    position: relative;
+    left: 0;
     height: 50px;
+    width: auto;
+}
+
+.hamburger > img {
+    width: 50px;
     margin: 5px 30 5px 0;
 }
 
+.hamburger-box {
+    display: none;
+    background-color: var(--main-color);
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.hamburger-box > li {
+    text-align: center;
+    list-style-type: none;
+    padding: 20px;
+}
+.hamburger:hover > .hamburger-box {
+    display: block;
+}
+
+.hamburger li:hover {
+    background-color: #404144;
+}
 .landing {
     display: flex;
     align-items: center;
@@ -57,19 +157,17 @@ body {
 }
 
 .landing-block {
-    display: inline-block;
-    max-height: 60%;
+    min-height: 0;
     min-width: 400px;
     flex-wrap: nowrap;
     text-align: left;
-    min-width: 100%;
     border: none;
 }
 
 
 .landing-left {
     margin: 60px 20px 20px 20px;
-    font-size: 2.5em;
+    font-size: 1em;
 }
 
 .landing-right {
@@ -77,26 +175,22 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     background-color: rgba(0,0,0,.5);
-    padding: 0 20px;
+    padding: 0 20px 20px;
 
 }
 
 .sub-header {
     font-size: 2.5rem;
     min-width: 100%;
-    text-align: center;
     padding-bottom: 30px;
     border-bottom: 1px dashed white;
 }
 
 .sub-text {
-    display: inline-block;
-    width: 45%;
     margin: 0 20px 40px 0;
 }
 
 .features {
-    height: var(--div-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,9 +221,17 @@ body {
     border-radius: var(--corners);
 }
 
+.features-box:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.4);
+    transition: .4s ease-in-out;
+}
+.amazing:hover {
+    display:block;
+    box-shadow: 0px 0px 3px 2px #2196f3;
+    transition: .2s ease-in-out;
+}
 .cool {
-    height: var(--div-height);
-    height: 400px;
+    height: 300px;
     background-color: var(--main-color);
     display: inline-block;
     width: 100%;
@@ -147,12 +249,14 @@ body {
 }
 
 .flip-div {
-    left: 20px;
+    left: 0;
+    right: 0;
     position: absolute;
     height: 150px;
     width: 300px;
+    color: white;
     margin: 0 auto;
-    top: 2500px;
+    top: -17%;
     background-color: var(--main-color);
     border: 8px solid white;
     text-align: center;
@@ -162,15 +266,13 @@ body {
     color: rgb(179, 0, 0);
 }
 
-.flip-div {
-    color: white;
-}
 .gradient {
     display: inline-block;
+    position: relative;
     text-align: right;
     color: white;
     width: 100%;
-    height: 400px;
+    height: 300px;
     padding-top: 100px;
     background-image: linear-gradient(to right, white, dodgerblue);
 }
@@ -179,69 +281,249 @@ body {
     margin: 0px 50px;
 }
 
-.gradient p {
+.gradient > p {
     margin: 0px 50px;
 }
 
+
+.flip-div:hover {
+    animation: flip 5s ease;
+}
+
 .gallery {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    width: 100%;
 }
 
 .gallery-box {
-    object-fit: scale-down;
-    max-height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    height: 300px;
     width: 100%;
-    margin: auto;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 0%;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.overlay > p {
+    font-size: 1.5rem;
+}
+.gallery-box:hover > .overlay {
+    display: block;
+}
+.gallery-box:hover > img {
+    transform: scale(1.2);
+    transition: .4s ease-in-out;
+    filter: brightness(70%);
 }
 
 .gallery-box img{
-    width: auto;
-    max-width: 100%;
-    height: auto;
+    max-width: 768px;
     max-height: 100%;
-    margin: auto;
+    object-fit: cover;
+    flex: 1;
+}
+
+.mail {
+    width: 250px;
+    margin: 50px auto;
+    text-align: left;
+}
+
+.sendit {
+    border: 2px solid var(--main-color);
+    border-radius: 2px;;
+    height: 30px;
+    overflow: hidden;
+
+}
+
+
+
+input:focus {
+    outline: none;
+}
+
+#mailbox {
+    width: 160px;
+    height: 25px;;
+    padding-left: 10px;
+    margin: 0;
+    border: none;
+    vertical-align: middle;
+}
+
+#submit {
+    position: relative;
+    background-color: var(--main-color);
+    left: 25px;
+    margin: auto 0;
+    padding: 3px 15px 3px 13px;
+    vertical-align: middle;
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    margin: 50px auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid #eee;
+}
+
+.footer-links {
+    max-width: 25%;
+    margin: 50px 58px;
+    width: 100px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--main-color);
+    line-height: 2em;
 }
 
 @media (min-width: 768px) {
-    .nav-list{
+    
+    .nav-list {
         list-style-type: none;
         padding-right: 10px;
         display: inline-block;
     }
 
+    .nav-list > a {
+        text-decoration: none;
+        padding-right: 50px;
+        display: inline-block;
+        color: white;
+    }
+    
+    .nav-drop-box  a {
+        text-decoration: none;
+        color: white;
+    }
     .hamburger {
         display: none;
     }
 
     .landing-block {
-        display: block;
+        max-height: 100%;
         min-width: 0;
         max-width: 90%;
         border: 8px solid white;
     }
 
-    .cool h1 {
-        font-size: 5em;
-    }
-    
-    .cool > p {
-        font-size: 2em;
-    }
-    .gradient h1 {
-        font-size: 5em;
+    .landing-left {
+        font-size: 1.5em;
     }
 
-    .gradient p {
-        font-size: 2em;
+    .sub-text {
+        margin-bottom: 0;
+        width: 45%;
+    }
+
+    .cool h1 {
+        font-size: 5rem;
     }
     
+    .cool {
+        height: 500px;
+    }
+
+    .cool > p {
+        font-size: 2rem;
+    }
+
+    .flip-div {
+        left: 50px;
+        right:0;
+        margin: 0;
+    }
+
+    .gradient h1 {
+        font-size: 5rem;
+    }
+
+    .gradient > p {
+        font-size: 2rem;
+    }
+    
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .gallery-box {
+        display: flex;
+        flex-wrap: wrap;
+        height: 300px;
+        width: 600px;
+        max-width: 50%;
+        overflow: hidden;
+    }
 }
 
 @media (min-width: 1200px) {
     .landing-block {
-        max-width: 80%;
+        display: flex;
+        min-height: 450px;
+        max-width: 75%;
+        max-height: 80%;
+    }
+    .landing-left {
+        font-size: 2rem;
+    }
+
+    .flip-div:hover {
+        animation: flip-slide 5s ease-in-out;
+    }
+    .landing-right{
+     width: 80%;
+    }
+
+    .sub-header {
+        margin-top: 50px;
+        font-size: 3rem;
+    }
+
+    .features {
+        height: 500px;
+    }
+
+    .cool {
+        height: 400px;
+    }
+    
+    .gradient {
+        height: 400px;
+    }
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .gallery-box {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        height: 300px;
+        width: 400px;
+        overflow: hidden;
+        min-width: 33%;
     }
 }
